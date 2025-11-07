@@ -2,11 +2,11 @@ from graph_extractor import get_access_token, get_approvals
 from csv_transformer import to_csv
 from sharepoint_uploader import upload_to_sharepoint
 import os
-from config import SITE_ID, DRIVE_ID
+from config import SITE_ID, DRIVE_ID, TARGET_APPROVAL_USER_ID
 
 def main():
     token = get_access_token()
-    approvals = get_approvals(token)
+    approvals = get_approvals(token, TARGET_APPROVAL_USER_ID)
     csv_path = to_csv(approvals, "approvals.csv")
 
     # Ejecuta tu script adicional de organización

@@ -14,12 +14,22 @@ def get_access_token():
     r = requests.post(url, data=data)
     return r.json()["access_token"]
 
-def get_approvals(token):
+def get_approvals(token, assigned_user_id=None):
     approvals = []
     headers = {"Authorization": f"Bearer {token}"}
+    params = None
+    if assigned_user_id:
+        params = {
+            "$filter": f"assignedTo/any(u:u/id eq '{assigned_user_id}')"
+        }
     url = GRAPH_URL
     while url:
-        r = requests.get(url, headers=headers)
+        r = requests.get(
+            url,
+            headers=headers,
+            params=params if url == GRAPH_URL else None
+        )
+        params = None
         data = r.json()
         approvals.extend(data.get("value", []))
         url = data.get("@odata.nextLink")
