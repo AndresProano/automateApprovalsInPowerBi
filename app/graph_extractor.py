@@ -14,6 +14,13 @@ def get_access_token():
     r = requests.post(url, data=data)
     return r.json()["access_token"]
 
+def resolve_user_id(email: str, token: str) -> str:
+    url = f"https://graph.microsoft.com/v1.0/users/{email}"
+    headers = {"Authorization": f"Bearer {token}"}
+    r = requests.get(url, headers=headers)
+    data = r.json()
+    return data.get("id")
+
 def get_approvals(token, assigned_user_id=None):
     approvals = []
     headers = {"Authorization": f"Bearer {token}"}

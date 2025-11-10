@@ -6,7 +6,6 @@ CLIENT_ID = os.environ.get("CLIENT_ID")
 CLIENT_SECRET = os.environ.get("CLIENT_SECRET")
 TENANT_ID = os.environ.get("TENANT_ID")
 GRAPH_SCOPE = os.environ.get("GRAPH_SCOPE", "https://graph.microsoft.com/.default")
-TARGET_USER_ID = os.environ.get("APPROVALS_USER_ID")
 
 # === SharePoint ===
 SITE_ID = os.environ.get("SITE_ID")
@@ -14,6 +13,11 @@ DRIVE_ID = os.environ.get("DRIVE_ID")
 
 # === General ===
 OUTPUT_FILENAME = os.environ.get("OUTPUT_FILENAME", "approvals.csv")
+CLEAN_OUTPUT_FILENAME = os.environ.get("CLEAN_OUTPUT_FILENAME", "approvals_cleaned.csv")
+
+TARGET_USER_ID = os.environ.get("APPROVALS_USER_ID")
+TARGET_USER_EMAIL = os.environ.get("APPROVALS_USER_EMAIL")
+
 LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO")
 
 # === Validación mínima ===
@@ -23,7 +27,6 @@ required = {
     "TENANT_ID": TENANT_ID,
     "SITE_ID": SITE_ID,
     "DRIVE_ID": DRIVE_ID,
-    "APPROVALS_USER_ID": TARGET_USER_ID
 }
 
 missing = [key for key, val in required.items() if not val]
