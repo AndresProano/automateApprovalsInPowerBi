@@ -23,6 +23,8 @@ POERBI_REPORT_URL = os.environ.get(
     "https://app.powerbi.com/groups/me/reports/ad626174-0c20-4536-93b5-46e5a198a061/f583d9fad842f89f238e?ctid=9f119962-8c62-431c-a8ef-e7e0a42d11fc&experience=power-bi"
 )
 
+FRONTEND_ORIGIN = os.environ.get("FRONTEND_ORIGIN", "http://localhost:8080")
+
 LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO")
 
 # === Validación mínima ===

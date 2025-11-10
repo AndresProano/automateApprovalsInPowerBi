@@ -1,9 +1,9 @@
 import requests, os
-from config import TENANT_ID, CLIENT_ID, CLIENT_SECRET
+from app.config import TENANT_ID, CLIENT_ID, CLIENT_SECRET
 import httpx
 import jwt
 from fastapi import HTTPException
-from jwt import PyJWKClient
+#from jwt import PyJWKClient
 
 _openid_cfg_cache = {}
 _jwk_cache = {}
@@ -60,6 +60,7 @@ def _get_openid_config():
     _openid_cfg_cache["cfg"] = data
     return data
 
+'''
 def validate_id_token(id_token: str):
     cfg = _get_openid_config()
     jwks_uri = cfg["jwks_uri"]
@@ -80,3 +81,4 @@ def validate_id_token(id_token: str):
     if not email:
         raise HTTPException(status_code=400, detail="No se encontró email en el token.")
     return email
+'''

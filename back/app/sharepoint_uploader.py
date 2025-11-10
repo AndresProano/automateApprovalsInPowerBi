@@ -1,5 +1,5 @@
 import requests, os
-from config import SITE_ID, DRIVE_ID
+from app.config import SITE_ID, DRIVE_ID
 
 def upload_to_sharepoint(token, file_path):
     headers = {

@@ -1,8 +1,8 @@
-from graph_extractor import get_access_token, get_approvals, resolve_user_id, validate_id_token
-from csv_transformer import to_csv
-from sharepoint_uploader import upload_to_sharepoint
+from app.graph_extractor import get_access_token, get_approvals, resolve_user_id
+from app.csv_transformer import to_csv
+from app.sharepoint_uploader import upload_to_sharepoint
 import os
-from config import SITE_ID, DRIVE_ID, TARGET_USER_EMAIL, TARGET_USER_ID, FRONTEND_ORIGIN
+from app.config import SITE_ID, DRIVE_ID, TARGET_USER_EMAIL, TARGET_USER_ID, FRONTEND_ORIGIN
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -21,12 +21,15 @@ class ApprovalResponse(BaseModel):
     id_token: str
 
 @app.post("/api/approvals/process")
-def process(req: ProcessRequest):
-    email = validate_id_token(req.id_token)
+def process(req: ApprovalResponse):
+    email = resolve_user_id(req.id_token, get_access_token())
     token = get_access_token()
     user_id = TARGET_USER_ID
-    if not user_id and TARGET_USER_EMAIL:
-        user_id = resolve_user_id(TARGET_USER_EMAIL, token)
+    user_id = TARGET_USER_ID
+    lookup_email = TARGET_USER_EMAIL or email
+    if not user_id:
+        user_id = resolve_user_id(lookup_email, token)
+
     approvals = get_approvals(token, user_id)
     csv_path = to_csv(approvals, "approvals.csv")
 
