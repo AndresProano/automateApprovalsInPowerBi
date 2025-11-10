@@ -18,6 +18,11 @@ CLEAN_OUTPUT_FILENAME = os.environ.get("CLEAN_OUTPUT_FILENAME", "approvals_clean
 TARGET_USER_ID = os.environ.get("APPROVALS_USER_ID")
 TARGET_USER_EMAIL = os.environ.get("APPROVALS_USER_EMAIL")
 
+POERBI_REPORT_URL = os.environ.get(
+    "POWERBI_REPORT_URL",
+    "https://app.powerbi.com/groups/me/reports/ad626174-0c20-4536-93b5-46e5a198a061/f583d9fad842f89f238e?ctid=9f119962-8c62-431c-a8ef-e7e0a42d11fc&experience=power-bi"
+)
+
 LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO")
 
 # === Validación mínima ===
