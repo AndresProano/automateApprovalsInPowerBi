@@ -1,0 +1,11 @@
+requests
+python-dotenv
+fastapi
+uvicorn[standard]
+httpx
+jwt
+msal
+PyJWT[crypto]>=2.8.0
+flask 
+cryptography
+flask-cors

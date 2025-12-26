@@ -1,0 +1,24 @@
+services:
+  back:
+    build: ./back
+    container_name: approvals-back
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+
+  front:
+    build:
+      context: ./front/vue-project 
+      args:
+        VITE_AAD_CLIENT_ID: ${MS_CLIENT_ID}
+        VITE_AAD_TENANT_ID: ${MS_TENANT_ID}
+        VITE_API_BASE_URL: http://localhost:8000
+        VITE_POWERBI_REPORT_URL: ${VITE_POWERBI_REPORT_URL}
+    container_name: approvals-front
+    ports:
+      - "8080:80"
+    depends_on:
+      - back
+    env_file:
+      - .env
