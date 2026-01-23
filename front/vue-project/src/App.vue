@@ -4,18 +4,17 @@
   import { msalConfig, loginRequest } from "./authConfig";
   import logoUsfq from "./logo-usfq.svg";
   
-  const showPowerBI = ref(false);
   const loading = ref(false);
-
   const isMsalReady = ref(false);
 
-  const urlToShow = ref("https://app.powerbi.com/view?r=eyJrIjoiYjIyMmEzMzAtMGRjYS00MTgwLWI5YTEtMTk1MmVmYzMzYjZkIiwidCI6IjlmMTE5OTYyLThjNjItNDMxYy1hOGVmLWU3ZTBhNDJkMTFmYyIsImMiOjR9"); 
-  
-  const msalInstance = new PublicClientApplication(msalConfig);
+  const urlToShow = ref("https://app.powerbi.com/reportEmbed?reportId=84f5e2e7-cafb-474f-8e04-63a5183d4256&autoAuth=true&ctid=9f119962-8c62-431c-a8ef-e7e0a42d11fc");
 
+  const msalInstance = new PublicClientApplication(msalConfig);
   const userList = ref([]);
   const isAuthenticated = ref(false);
   const tokenGuardado = ref("");
+
+  const delay = ms => new Promise(res => setTimeout(res, ms));
 
   onMounted(async ()=>{
     try{
@@ -92,8 +91,8 @@
     }
   }
 
-  function abrirPestana() {
-    showPowerBI.value = true;
+  async function abrirPestana() {
+    window.open(urlToShow.value, "_blank");
   }
   
   function cerrarPestana() {
@@ -102,7 +101,7 @@
 
   async function ejecutarTodo() {
     await ejecutarAccionBackend();
-    abrirPestana();
+    await abrirPestana();
   }
 </script>
 
