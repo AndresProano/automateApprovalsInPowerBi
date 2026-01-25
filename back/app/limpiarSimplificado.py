@@ -199,6 +199,4 @@ if __name__ == "__main__":
     output_file = sys.argv[2]
     clean(input_file, output_file)
 
-    #input = "datos_completos_power_bi.csv"
-    #output = "datos_completos_power_bi_clean.csv"
-    #clean(input, output)
+    
