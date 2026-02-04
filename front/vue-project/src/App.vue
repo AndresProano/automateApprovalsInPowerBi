@@ -14,8 +14,6 @@
   const isAuthenticated = ref(false);
   const tokenGuardado = ref("");
 
-  const delay = ms => new Promise(res => setTimeout(res, ms));
-
   onMounted(async ()=>{
     try{
       await msalInstance.initialize();

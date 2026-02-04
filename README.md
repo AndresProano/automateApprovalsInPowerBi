@@ -1,5 +1,17 @@
 # 📊 Automación de Aprobaciones para Power BI
 
+## 🧭 Resumen Ejecutivo
+- **Objetivo:** Automatizar la extracción, limpieza y publicación de aprobaciones de Microsoft Teams hacia SharePoint para su análisis en Power BI.
+- **Alcance:** Frontend en Vue 3 para autenticación y disparo de procesos; Backend en FastAPI que realiza ETL (Graph → CSV → limpieza → SharePoint); visualización en Power BI embebida.
+- **Requisitos implementados:** Autenticación MSAL; extracción de Approvals vía Microsoft Graph (con paginación); conversión a CSV; limpieza y clasificación; subida a SharePoint; endpoint `GET /api/approvals`; UI para ejecutar el flujo.
+- **Requisitos no funcionales:** Seguridad con OAuth 2.0 y variables de entorno; CORS controlado; contenedorización con Docker Compose; manejo de errores y respuestas HTTP; configuración centralizada en `app/config.py`.
+- **Estructura de datos:**
+   - Archivo bruto (`approvals.csv`): id, título, tipo, fechas, estado, resultado, aprobadores, propietario.
+   - Archivo limpio (`datos_completos_power_bi.csv`): título, título limpio, ticket, detalles, estado, fuente, fechas (año/mes/día), remitente, respuestas personalizadas, clasificación macro/micro y por fuente.
+- **Tecnologías y conectores:** FastAPI, Python 3.11, Requests/MSAL, Microsoft Graph Approvals (beta), SharePoint Graph, Vue 3 + Vite, Nginx, Docker Compose.
+- **Control de versiones:** Git/GitHub; flujo propuesto de ramas `main` (estable) y `feature/*` para nuevas funcionalidades con PRs.
+- **Próximos pasos sugeridos:** Agendar ETL (cron/worker); reforzar reglas de clasificación; mover IDs/URLs del frontend a variables `VITE_*`; añadir pruebas unitarias; mejorar embebido Power BI con SSO; almacenar histórico en base de datos.
+
 Sistema automatizado para extraer datos de Microsoft Teams Approvals y subirlos a SharePoint para su posterior análisis en Power BI.
 
 ## 📋 Descripción General
